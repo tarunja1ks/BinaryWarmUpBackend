@@ -41,3 +41,4 @@ class aienglish:
         # Save the vectorizer to a file
         joblib.dump(self.tfidf_vectorizer, "vectorizerenglish.joblib")
 
+    
