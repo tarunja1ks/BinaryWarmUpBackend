@@ -1,14 +1,29 @@
-import langid
+from langdetect import detect, lang_detect_exception
+from langdetect.lang_detect_exception import LangDetectException
 
-def language_detector(text):
-    lang, _ = langid.classify(text)
-    return lang
+def detect_language(text):
+    try:
+        detected_lang = detect(text)
+        return detected_lang
+    except LangDetectException as e:
+        print(f"Error: {e}")
+        return None
 
-if __name__ == "__main__":
+def main():
+    print("Language Detection AI")
+    print("Type 'exit' to quit.")
+
     while True:
-        input_text = input("Enter text (or type 'exit' to quit): ")
+        input_text = input("Enter text: ")
         if input_text.lower() == 'exit':
             break
 
-        detected_language = language_detector(input_text)
-        print(f"Detected language: {detected_language}")
+        detected_language = detect_language(input_text)
+
+        if detected_language:
+            print(f"Detected language: {detected_language}")
+        else:
+            print("Language detection failed.")
+
+if __name__ == "__main__":
+    main()
